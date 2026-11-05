@@ -32,6 +32,7 @@ DSA/
 ├── Infosys/                      # Specialist Programmer (SP) & DSE Interview Questions
 ├── TCS_Mock/                     # Mock Assessment Problems
 ├── TCS_NQT/                      # TCS National Qualifier Test Coding Problems
+├── qvantel/                      # Qvantel Technical Assessment Coding Questions
 └── Practice/                     # LeetCode Medium/Hard Patterns & Frequently Asked Problems
 ```
 
