@@ -3,41 +3,51 @@ package Practice;
 public class DecodeWays {
     /**
      * LeetCode 91: Decode Ways
+     * Difficulty: Medium
      * 
      * A message containing letters from A-Z can be encoded into numbers using the mapping:
      * 'A' -> "1", 'B' -> "2", ..., 'Z' -> "26"
      * 
      * Given a string s containing only digits, return the number of ways to decode it.
+     * 
+     * Approach:
+     * - Space-Optimized Dynamic Programming (O(1) Auxiliary Space).
+     * - Single-digit decode: If s[i] != '0', it contributes prev1 ways.
+     * - Two-digit decode: If number (s[i-1..i]) is between 10 and 26, it contributes prev2 ways.
+     * - Roll the states: prev2 = prev1, prev1 = current.
+     * 
+     * Complexity:
+     * - Time: O(n), where n = s.length() (single linear pass).
+     * - Space: O(1), constant extra memory.
      */
     public int numDecodings(String s) {
-        if (s == null || s.length() == 0 || s.charAt(0) == '0') {
+        if (s == null || s.length() == 0) {
             return 0;
         }
 
-        int n = s.length();
-
-        // Space-optimized DP:
-        // prev2 corresponds to dp[i - 2], initialized to 1 for the empty string base case
         int prev2 = 1;
-        // prev1 corresponds to dp[i - 1], initialized to 1 since s[0] != '0'
-        int prev1 = 1;
+        int prev1 = 0;
 
-        for (int i = 2; i <= n; i++) {
+        if (s.charAt(0) != '0') {
+            prev1 = 1;
+        }
+
+        for (int i = 1; i < s.length(); i++) {
             int current = 0;
 
-            // Check single digit decode: s[i - 1] must be between '1' and '9'
-            char singleChar = s.charAt(i - 1);
-            if (singleChar != '0') {
+            // Single-digit decoding
+            if (s.charAt(i) != '0') {
                 current += prev1;
             }
 
-            // Check two-digit decode: s[i - 2 ... i - 1] must be between 10 and 26
-            int twoDigit = Integer.parseInt(s.substring(i - 2, i));
-            if (twoDigit >= 10 && twoDigit <= 26) {
+            // Two-digit decoding
+            int number = (s.charAt(i - 1) - '0') * 10
+                       + (s.charAt(i) - '0');
+
+            if (number >= 10 && number <= 26) {
                 current += prev2;
             }
 
-            // Move state forward
             prev2 = prev1;
             prev1 = current;
         }

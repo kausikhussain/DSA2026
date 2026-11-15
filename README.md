@@ -33,6 +33,7 @@ DSA/
 ├── TCS_Mock/                     # Mock Assessment Problems
 ├── TCS_NQT/                      # TCS National Qualifier Test Coding Problems
 ├── qvantel/                      # Qvantel Technical Assessment Coding Questions
+├── leetcode/                     # Curated LeetCode Problem Solutions
 └── Practice/                     # LeetCode Medium/Hard Patterns & Frequently Asked Problems
 ```
 
